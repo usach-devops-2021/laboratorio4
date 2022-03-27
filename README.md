@@ -45,3 +45,12 @@
 * cd /var/jenkins_home
 * wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 * dpkg -i google-chrome-stable_current_amd64.deb
+
+### Node
+* apt-get update &&  apt-get  install -y nodejs npm
+
+### Newman
+* npm install -g newman
+
+### Maven
+* apt-get install maven
