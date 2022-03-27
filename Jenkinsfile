@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Install npm modules (Front)') {
+        stage('Paso 1: Install npm modules (Front)') {
             steps {
                 script {
                     sh "echo 'npm install!'"
@@ -10,7 +10,7 @@ pipeline {
                 }
             }
         }
-        stage('Start Node Server (Front)') {
+        stage('Paso 2: Start Node Server (Front)') {
             steps {
                 script {
                     sh "echo 'npm app!'"
@@ -18,17 +18,17 @@ pipeline {
                 }
             }
         }
-        stage('Dormir(Esperar 15sg) (Front)') {
+        stage('Paso 3: Dormir (Esperar 15seg) (Front)') {
             steps {
                 sh 'sleep 15'
             }
         }
-        stage('Curl con Sleep de prueba  (Front)') {
+        stage('Paso 4: Curl con Sleep de prueba (Front)') {
             steps {
                 sh "curl -X GET 'http://localhost:3000/'"
             }
         }
-        stage('Compilar (Back)') {
+        stage('Paso 5: Compilar (Back)') {
             steps {
                 script {
                     sh "echo 'Compile Code!'"
@@ -36,22 +36,22 @@ pipeline {
                 }
             }
         }
-        stage('Levantar Springboot APP (Back)') {
+        stage('Paso 6: Levantar Springboot APP (Back) para realizar pruebas siguientes') {
             steps {
                 sh 'mvn spring-boot:run &'
             }
         }
-        stage('Dormir(Esperar 60sg) (Back)') {
+        stage('Paso 7: Dormir(Esperar 60seg) (Back)') {
             steps {
                 sh 'sleep 60'
             }
         }
-        stage('Curl con Sleep de prueba (Back)') {
+        stage('Paso 8: Curl con Sleep de prueba (Back)') {
             steps {
                 sh 'curl -X GET "http://localhost:8081/rest/msdxc/ping"'
             }
         }
-        stage('Testear (Back)') {
+        stage('Paso 9: Testear (Back)') {
             steps {
                 script {
                     sh "echo 'Test Code!'"
@@ -60,7 +60,7 @@ pipeline {
                 }
             }
         }
-        stage('Build .Jar (Back)') {
+        stage('Paso 10: Build .Jar (Back)') {
             steps {
                 script {
                     sh "echo 'Build .Jar!'"
@@ -68,12 +68,12 @@ pipeline {
                 }
             }
         }
-        stage('Test Jmeter (Back)') {
+        stage('Paso 11: Test Jmeter (Back)') {
             steps {
                 sh 'mvn jmeter:jmeter -Pjmeter'
             }
         }
-        stage('Test API responses (Back)') {
+        stage('Paso 12: Test API responses (Back)') {
             steps {
                 sh 'newman run LabMod4.postman_collection.json'
             }
